@@ -1,0 +1,289 @@
+body {
+    background: #D9D9D9;
+    margin: 0;
+    padding: 0;
+    font: 20px/1.5 Arial, Helvetica, sans-serif;
+}
+
+header.page_header {
+    color: #2c2c2c;
+    background-color: #E7E6E6;
+    padding-top: 10px;
+    min-height: 120px;
+    margin: 0;
+}
+
+header.page_header .logo_utt {
+    vertical-align: middle;
+    float: left;
+    display: inline;
+    padding: 10px 0 0 1%;
+}
+
+h1 {
+    margin:0;
+}
+header.page_header .titre_page {
+    font-size: 30px;
+    color: black;
+    font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+    text-rendering: optimizeLegibility;
+    letter-spacing: .05em;
+    padding: 10px 12% 0 0;
+}
+
+main {
+    background: #F2F2F2;
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+main.index .recherche {
+    width:48%;
+    display: inline-block;
+    padding: 5% 0.5%;
+    border-right: black 2px solid;
+}
+
+main.index .scan {
+    width:48%;
+    display: inline-block;
+    margin: auto;
+    padding: 5% 0.5%;
+}
+
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #D0CECE;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+main.index .scan .logo_scan {
+    height: 50px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+main.index .produits {
+    width:54%;
+    display: inline-block;
+    padding:5% 0 5% 15%;
+}
+
+main.index .melange {
+    width: auto;
+    display: inline-block;
+    vertical-align: top;
+    padding-top:5%;
+}
+li{
+    margin: 10px 0;
+}
+
+a:link {
+    font: 20px/1.5 Arial, Helvetica, sans-serif;
+    color: black;
+}
+
+a:visited {
+    font: 20px/1.5 Arial, Helvetica, sans-serif;
+    color: black;
+}
+
+.liste_produit :hover {
+    font: 20px/1.5 Arial, Helvetica, sans-serif;
+    color: grey;
+}
+.FS{
+    padding-left = 30px;
+}
+
+main .retour .logo_retour {
+    max-height: 50px;
+    max-width: 50px;
+    height: auto;
+    width: auto;
+    display: block;
+    padding-left: 10%;
+    vertical-align: top;
+    line-height: 50px;
+    float: left;
+}
+main .affiche_produit h2 {
+    display: block;
+    text-align: center;
+}
+main .FS .logo_picto_secu {
+    height: 90px;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 4%;
+}
+main .FS .logo_picto_precau {
+    height: 90px;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 4%;
+}
+.tg  {
+    display: block;
+    padding-top: 75px;
+    padding-left: 5%;
+    padding-right: 5%;
+    border-collapse:collapse;
+    border-spacing:0;
+}
+.tg td:first-child {
+  width: 45% ;
+}
+.tg td{
+    padding:10px 5px;
+    border-style:solid;
+    border-width:1px;
+    overflow:hidden;
+    word-break:normal;
+    border-color:black;
+}
+.tg th{
+    padding:10px 5px;
+    border-style:solid;
+    border-width:1px;
+    overflow:hidden;
+    word-break:normal;
+    border-color:black;
+}
+.tg .tg-0lax{
+    text-align:left;
+    vertical-align:top;
+}
+
+#nom{
+    border-width: 10px;
+    font-size: 25px;
+    text-align: center;
+    vertical-align: middle;
+}
+.fiche_legale {
+  display: inline-block;
+  vertical-align: top;
+  line-height: 50px;
+  padding-right: 10%;
+  margin: auto;
+  float:right;
+}
+.feedback {
+  display: inline-block;
+  vertical-align: top;
+  line-height: 50px;
+  padding-right: 10%;
+  margin: auto;
+  float:right;
+}
+
+.formulaire_produit .ajout_produit {
+ padding-left: 5%;
+ padding-right: 5%;
+}
+
+.index_admin .fonctionnalités {
+    width:54%;
+    display: inline-block;
+    padding:5% 0 5% 15%;
+}
+
+.formulaire_stockage .ajout_stockage  {
+ padding-left: 5%;
+ padding-right: 5%;
+}
+
+.formulaire_poubelle .ajout_poubelle {
+ padding-left: 5%;
+ padding-right: 5%;
+}
+
+.formulaire_stockage .supp_stockage {
+ padding-left: 5%;
+ padding-right: 5%;
+}
+
+.formulaire_poubelle .supp_poubelle {
+ padding-left: 5%;
+ padding-right: 5%;
+}
+.formulaire_produit .supp_produit {
+ padding-left: 5%;
+ padding-right: 5%;
+}
+
+.formulaire_r_bug .envoi_mail_bug {
+ padding-left: 5%;
+ padding-right: 5%;
+}
+
+#t_produits {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#t_produits td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#t_produits tr:nth-child(even){background-color: #f2f2f2;}
+
+#t_produits tr:hover {background-color: #ddd;}
+
+textarea {
+  width: 100%;
+  height: 100px;
+}
+
+.scan {
+  display: block;
+  margin: auto;
+  align-self: center;
+  padding-left: 20%;
+}
+
+#preview {
+  display: block;
+  align-self: center;
+  width: 100%;
+  height: auto;
+}
+
+.tg-0lax .formule_developpee {
+  max-height: 100px;
+  width: auto;
+}
+
+.go_user {
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+/*
+
+*/

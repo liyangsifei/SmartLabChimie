@@ -1,0 +1,260 @@
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P101', "En cas de consultation d’un médecin, garder à disposition le récipient ou l’étiquette.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P102', "Tenir hors de portée des enfants.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P103', "Lire l’étiquette avant utilisation.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P201', "Se procurer les instructions spéciales avant utilisation.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P202', "Ne pas manipuler avant d’avoir lu et compris toutes les précautions de sécurité.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P210', "Tenir à l’écart de la chaleur, des surfaces chaudes, des étincelles, des flammes nues et de toute autre source d’inflammation. Ne pas fumer.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P211', "Ne pas vaporiser sur une flamme nue ou sur toute autre source d’ignition.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P220', "Tenir/stocker à l’écart des vêtements/…/matières combustibles");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P221', "Prendre toutes précautions pour éviter de mélanger avec des matières combustibles…");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P222', "Ne pas laisser au contact de l’air.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P223', "Éviter tout contact avec l’eau.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P230', "Maintenir humidifié avec…");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P231', "Manipuler sous gaz inerte.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P232', "Protéger de l’humidité.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P233', "Maintenir le récipient fermé de manière étanche.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P234', "Conserver uniquement dans le récipient d’origine.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P235', "Tenir au frais.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P240', "Mise à la terre/liaison équipotentielle du récipient et du matériel de réception.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P241', "Utiliser du matériel électrique/de ventilation/ d’éclairage/…/ antidéflagrant.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P242', "Ne pas utiliser d’outils produisant des étincelles.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P243', "Prendre des mesures de précaution contre les décharges électrostatiques.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P244', "Ni huile, ni graisse sur les robinets et raccords.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P250', "Éviter les abrasions/les chocs/…/les frottements.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P251', "Ne pas perforer, ni brûler, même après usage.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P260', "Ne pas respirer les poussières/fumées/gaz/brouillards/vapeurs/ aérosols.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P261', "Éviter de respirer les poussières/fumées/gaz/ brouillards/vapeurs/ aérosols.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P262', "Éviter tout contact avec les yeux, la peau ou les vêtements.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P263', "Éviter tout contact avec la substance au cours de la grossesse/pendant l’allaitement.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P264', "Se laver … soigneusement après manipulation.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P270', "Ne pas manger, boire ou fumer en manipulant ce produit.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P271', "Utiliser seulement en plein air ou dans un endroit bien ventilé.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P272', "Les vêtements de travail contaminés ne devraient pas sortir du lieu de travail.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P273', "Éviter le rejet dans l’environnement.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P280', "Porter des gants de protection/des vêtements de protection/un équipement de protection des yeux/ du visage.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P282', "Porter des gants isolants contre le froid/un équipement de protection du visage/ des yeux.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P283', "Porter des vêtements résistant au feu/aux flammes/ignifuges.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P284', "[Lorsque la ventilation du local est insuffisante] porter un équipement de protection respiratoire.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P231 + P232', "Manipuler sous gaz inerte. Protéger de l’humidité.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P235 + P410', "Tenir au frais. Protéger du rayonnement solaire.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P301', "EN CAS D’INGESTION:");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P302', "EN CAS DE CONTACT AVEC LA PEAU:");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P303', "EN CAS DE CONTACT AVEC LA PEAU (ou les cheveux):");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P304', "EN CAS D’INHALATION:");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P305', "EN CAS DE CONTACT AVEC LES YEUX:");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P306', "EN CAS DE CONTACT AVEC LES VÊTEMENTS:");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P308', "EN CAS d’exposition prouvée ou suspectée:");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P310', "Appeler immédiatement un CENTRE ANTIPOISON/un médecin/…");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P311', "Appeler un CENTRE ANTIPOISON/un médecin/…");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P312', "Appeler un CENTRE ANTIPOISON/un médecin/…/en cas de malaise.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P313', "Consulter un médecin.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P314', "Consulter un médecin en cas de malaise.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P315', "Consulter immédiatement un médecin.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P320', "Un traitement spécifique est urgent (voir … sur cette étiquette).");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P321', "Traitement spécifique (voir … sur cette étiquette).");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P330', "Rincer la bouche.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P331', "NE PAS faire vomir.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P332', "En cas d’irritation cutanée:");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P333', "En cas d’irritation ou d’éruption cutanée:");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P334', "Rincer à l’eau fraîche/poser une compresse humide.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P335', "Enlever avec précaution les particules déposées sur la peau.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P336', "Dégeler les parties gelées avec de l’eau tiède. Ne pas frotter les zones touchées.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P337', "Si l’irritation oculaire persiste:");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P338', "Enlever les lentilles de contact si la victime en porte et si elles peuvent être facilement enlevées. Continuer à rincer.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P340', "Transporter la personne à l’extérieur et la maintenir dans une position où elle peut confortablement respirer.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P342', "En cas de symptômes respiratoires:");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P351', "Rincer avec précaution à l’eau pendant plusieurs minutes.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P352', "Laver abondamment à l’eau/…");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P353', "Rincer la peau à l’eau/se doucher.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P360', "Rincer immédiatement et abondamment avec de l’eau les vêtements contaminés et la peau avant de les enlever.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P361', "Enlever immédiatement tous les vêtements contaminés.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P362', "Enlever les vêtements contaminés.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P363', "Laver les vêtements contaminés avant réutilisation.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P364', "Et les laver avant réutilisation.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P370', "En cas d’incendie:");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P371', "En cas d’incendie important et s’il s’agit de grandes quantités:");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P372', "Risque d’explosion en cas d’incendie.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P373', "NE PAS combattre l’incendie lorsque le feu atteint les explosifs.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P374', "Combattre l’incendie à distance en prenant les précautions normales.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P375', "Combattre l’incendie à distance à cause du risque d’explosion.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P376', "Obturer la fuite si cela peut se faire sans danger.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P377', "Fuite de gaz enflammé: Ne pas éteindre si la fuite ne peut pas être arrêtée sans danger.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P378', "Utiliser… pour l’extinction.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P380', "Évacuer la zone.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P381', "Éliminer toutes les sources d’ignition si cela est faisable sans danger.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P390', "Absorber toute substance répandue pour éviter qu’elle attaque les matériaux environnants.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P391', "Recueillir le produit répandu.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P301 + P310', "EN CAS D’INGESTION: Appeler immédiatement un CENTRE ANTIPOISON/un médecin/ …");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P301 + P312', "EN CAS D’INGESTION: Appeler un CENTRE ANTIPOISON/un médecin/…/en cas de malaise.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P301 + P330 + P331', "EN CAS D’INGESTION: rincer la bouche. NE PAS faire vomir.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P302 + P334', "EN CAS DE CONTACT AVEC LA PEAU: rincer à l’eau fraîche/poser une compresse humide.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P302 + P352', "EN CAS DE CONTACT AVEC LA PEAU: Laver abondamment à l’eau/… ");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P303 + P361 + P353', "EN CAS DE CONTACT AVEC LA PEAU (ou les cheveux): Enlever immédiatement tous les vêtements contaminés. Rincer la peau à l’eau/Se doucher.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P304 + P340', "EN CAS D’INHALATION: transporter la personne à l’extérieur et la maintenir dans une position où elle peut confortablement respirer.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P305 + P351 + P338', "EN CAS DE CONTACT AVEC LES YEUX: rincer avec précaution à l’eau pendant plusieurs minutes. Enlever les lentilles de contact si la victime en porte et si elles peuvent être facilement enlevées. Continuer à rincer.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P306 + P360', "EN CAS DE CONTACT AVEC LES VÊTEMENTS: rincer immédiatement et abondamment avec de l’eau les vêtements contaminés et la peau avant de les enlever.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P308 + P311', "EN CAS d’exposition prouvée ou suspectée: Appeler un CENTRE ANTIPOISON/un médecin/…");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P308 + P313', "EN CAS d’exposition prouvée ou suspectée: consulter un médecin.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P332 + P313', "En cas d’irritation cutanée: consulter un médecin.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P333 + P313', "En cas d’irritation ou d’éruption cutanée: consulter un médecin.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P335 + P334', "Enlever avec précaution les particules déposées sur la peau. Rincer à l’eau fraîche/poser une compresse humide.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P337 + P313', "Si l’irritation oculaire persiste: consulter un médecin.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P342 + P311', "En cas de symptômes respiratoires: Appeler un CENTRE ANTIPOISON/un médecin/…");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P361 + P364', "Enlever immédiatement tous les vêtements contaminés et les laver avant réutilisation.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P362 + P364', "Enlever les vêtements contaminés et les laver avant réutilisation.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P370 + P376', "En cas d’incendie: obturer la fuite si cela peut se faire sans danger.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P370 + P378', "En cas d’incendie: Utiliser… pour l’extinction.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P370 + P380', "En cas d’incendie: évacuer la zone.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P370 + P380 + P375', "En cas d’incendie: évacuer la zone. Combattre l’incendie à distance à cause du risque d’explosion.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P371 + P380 + P375', "En cas d’incendie important et s’il s’agit de grandes quantités: évacuer la zone. Combattre l’incendie à distance à cause du risque d’explosion.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P401', "Stocker …");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P402', "Stocker dans un endroit sec.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P403', "Stocker dans un endroit bien ventilé.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P404', "Stocker dans un récipient fermé.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P405', "Garder sous clef.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P406', "Stocker dans un récipient résistant à la corrosion/récipient en … avec doublure intérieure résistant à la corrosion.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P407', "Maintenir un intervalle d’air entre les piles/ palettes.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P410', "Protéger du rayonnement solaire.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P411', "Stocker à une température ne dépassant pas … o C/… o F.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P412', "Ne pas exposer à une température supérieure à 50 o C/122 o F.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P413', "Stocker les quantités en vrac de plus de … kg/ … lb à une température ne dépassant pas … o C/… o F.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P420', "Stocker à l’écart des autres matières.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P422', "Stocker le contenu sous …");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P402 + P404', "Stocker dans un endroit sec. Stocker dans un récipient fermé.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P403 + P233', "Stocker dans un endroit bien ventilé. Maintenir le récipient fermé de manière étanche.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P403 + P235', "Stocker dans un endroit bien ventilé. Tenir au frais.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P410 + P403', "Protéger du rayonnement solaire. Stocker dans un endroit bien ventilé.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P410 + P412', "Protéger du rayonnement solaire. Ne pas exposer à une température supérieure à 50 o C/ 122 o F.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P411 + P235', "Stocker à une température ne dépassant pas … o C/… o F. Tenir au frais.");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P501', "Éliminer le contenu/récipient dans …");
+INSERT INTO `conseil_prudence`(`code`, `phrase`) VALUES (
+'P502', "Se reporter au fabricant/fournisseur pour des informations concernant la récupération/le recyclage");
