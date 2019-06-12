@@ -22,7 +22,7 @@ class Mail {
   }
   public function supprimerMail($id) {
   }
-  public function getListMail() {
+  public function getListeMail() {
     $sql = 'SELECT * FROM `mail`';
     $stmt = $this->_db->prepare($sql);
     $stmt->execute();

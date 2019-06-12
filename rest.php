@@ -303,7 +303,108 @@ class Restful {
     }
   }
   private function _controlerListeMail() {
-    return $this->_mail->getListMail();
+    return $this->_mail->getListeMail();
+  }
+
+  private function _controlerMentionDangers() {
+    if($this->_requestMethod=='GET'){
+      if (empty($this->_resourceId)) {
+        return $this->_controlerListeMentionDanger();
+      } else {
+          return $this->_controlerVueMentionDanger();
+      }
+    } else {
+      throw new Exception('Method Not Allowed');
+    }
+  }
+  private function _controlerListeMentionDanger() {
+    return $this->_mentionDanger->getListeMentionDanger();
+  }
+  private function _controlerVueMentionDanger() {
+    try {
+      return $this->_mentionDanger->getMentionDanger($this->_resourceId);
+    } catch(Exception $e) {
+      if($e->getCode() == 1) {
+        throw new Exception($e->getMessage, 404);
+      } else {
+        throw new Exception($e->getMessage, 500);
+      }
+    }
+  }
+  private function _controlerConseilPrudences() {
+    if($this->_requestMethod=='GET'){
+      if (empty($this->_resourceId)) {
+        return $this->_controlerListeConseilPrudence();
+      } else {
+        return $this->_controlerVueConseilPrudence();
+      }
+    } else {
+      throw new Exception('Method Not Allowed');
+    }
+  }
+  private function _controlerListeConseilPrudence() {
+    return $this->_conseilPrudence->getListeConseilPrudence();
+  }
+  private function _controlerVueConseilPrudence() {
+    try {
+      return $this->_conseilPrudence->getConseilPrudence($this->_resourceId);
+    } catch(Exception $e) {
+      if($e->getCode() == 1) {
+        throw new Exception($e->getMessage, 404);
+      } else {
+        throw new Exception($e->getMessage, 500);
+      }
+    }
+  }
+  private function _controlerPictogrammePrecautions() {
+    if($this->_requestMethod=='GET'){
+      if (empty($this->_resourceId)) {
+        return $this->_controlerListePictogrammePrecaution();
+      } else {
+        return $this->_controlerVuePictogrammePrecaution();
+      }
+    } else {
+      throw new Exception('Method Not Allowed');
+    }
+  }
+  private function _controlerListePictogrammePrecaution() {
+    return $this->_pictogrammePrecaution->getListePictogrammePrecaution();
+  }
+  private function _controlerVuePictogrammePrecaution() {
+    try {
+      return $this->_pictogrammePrecaution->getPictogrammePrecaution($this->_resourceId);
+    } catch(Exception $e) {
+      if($e->getCode() == 1) {
+        throw new Exception($e->getMessage, 404);
+      } else {
+        throw new Exception($e->getMessage, 500);
+      }
+    }
+  }
+  private function _controlerPictogrammeSecurites() {
+    if($this->_requestMethod=='GET'){
+      if (empty($this->_resourceId)) {
+        return $this->_controlerListePictogrammeSecurite();
+      } else {
+        return $this->_controlerVuePictogrammeSecurite();
+      }
+    } else {
+      throw new Exception('Method Not Allowed');
+    }
+  }
+  private function _controlerListePictogrammeSecurite() {
+    return $this->_pictogrammeSecurite->getListePictogrammeSecurite();
+  }
+  private function _controlerVuePictogrammeSecurite() {
+    try {
+      return $this->_pictogrammeSecurite->getPictogrammeSecurite($this->_resourceId);
+    } catch(Exception $e) {
+      if($e->getCode() == 1) {
+        throw new Exception($e->getMessage, 404);
+      } else {
+        throw new Exception($e->getMessage, 500);
+      }
+    }
   }
   private function _getBodyParams() {
     $raw = file_get_contents('php://input');
