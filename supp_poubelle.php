@@ -29,28 +29,21 @@
 	          		<br />
 	            	<h3>Sélectionnez le(s) poubelle(s) à supprimer : </h3>
 	            	<?php
-	            		require 'mysql_connect.php';
-/*
                   require __DIR__.'/tools/cURL.php';
-                  $url = './poubelles/';
-                  $data = curlGet($url);
+                  $data = curlGet(poubellesURL);
                   $data = json_decode($data,true);
                   echo "<table id='t_produits'>";
-                  if() {
+                  if(empty($data)) {
                     echo '<a href="./form_poubelle.php">Pas de poubelle dans la base de données, cliquez ici pour en ajouter.</a>';
                   } else {
                     echo '<tr><td>Salle</td><td>Nom</td><td>Supprimer?</td></tr>';
-                    for($ind=0;$ind++;$ind<count($data)) {
-                      echo "<tr><td>";
-      						    echo $data['salle'];
-                      echo "</td><td>";
-                      echo $data['nom'];
-      						    echo "</td><td>
-                      <input type='checkbox' name='suppression' value=".$data['nom']." ></td><tr>";
+                    for($ind=0;$ind<count($data);$ind++) {
+                      echo "<tr><td>".$data[$ind]['salle']."</td><td>".$data[$ind]['nom']."</td><td><input type='checkbox' name='suppression' value=".$data[$ind]['ID']." ></td><tr>";
                     }
                   }
                   echo "</table>";
-*/
+/*
+                  require 'mysql_connect.php';
 	            		$req_nom_poubelle = "SELECT nom, salle FROM poubelle";
       						$res_nom_poubelle = mysqli_query($connection, $req_nom_poubelle);
 
@@ -63,9 +56,9 @@
       						    echo $res_nom['salle'];
                       echo "</td><td>";
                       echo $res_nom['nom'];
-      						    echo "</td><td><input type='checkbox' name='suppression' value=".$res_nom['nom']." ></td><tr>";
+      						    echo "</td><td><input type='checkbox' name='suppression' value=".$res_nom['ID']." ></td><tr>";
       						}
-      						echo "</table>";
+      						echo "</table>";*/
 	            	?>
             	<input type="submit" name="form_supp_poubelle" value="Supprimer les poubelles sélectionnées">
             	</form>

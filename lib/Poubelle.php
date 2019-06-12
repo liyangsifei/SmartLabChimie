@@ -21,6 +21,11 @@ class Poubelle {
   public function modifierPoubelle($id,$valeur,$type) {
   }
   public function supprimerPoubelle($id) {
+    $sql = 'DELETE FROM `poubelle` WHERE `ID`='.$id;
+    $stmt = $this->_db->prepare($sql);
+    $stmt->execute();
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $data;
   }
   public function getListPoubelle() {
     $sql = 'SELECT * FROM `poubelle`';

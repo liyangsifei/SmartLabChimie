@@ -26,7 +26,12 @@
     }
     public function modifierStockage($id,$valeur,$type) {
     }
-    public function supprimerStockage($id,$valeur,$type) {
+    public function supprimerStockage($id) {
+      $sql = 'DELETE FROM `stockage` WHERE `ID`='.$id;
+      $stmt = $this->_db->prepare($sql);
+      $stmt->execute();
+      $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $data;
     }
     public function getListStockage() {
       $sql = 'SELECT * FROM `stockage`';

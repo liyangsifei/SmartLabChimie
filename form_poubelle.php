@@ -27,7 +27,6 @@
             <div class="ajout_poubelle">
                 <h3>Ajout d'une nouvelle poubelle : </h3>
                 <form method="post" action="insert_poubelle.php" enctype="multipart/form-data">
-
                     <p>
                         Salle :<input type="text" name="salle_p"><br />
                         Nom de la poubelle :<input type="text" name="nom_p"><br />

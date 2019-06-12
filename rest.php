@@ -65,7 +65,7 @@ class Restful {
           $this->_json($this->_controlerConseilPrudences());
           break;
         case 'pictogrammePrecautions':
-          $this->_json($this->_controlerPictogrammePrecautionss());
+          $this->_json($this->_controlerPictogrammePrecautions());
           break;
         case 'pictogrammeSecurites':
           $this->_json($this->_controlerPictogrammeSecurites());
@@ -151,6 +151,15 @@ class Restful {
   private function _controlerModifierProduit() {
   }
   private function _controlerSupprimerProduit() {
+    try {
+      return $this->_produit->supprimerProduit($this->_resourceId);
+    } catch(Exception $e) {
+      if($e->getCode() == 1) {
+        throw new Exception($e->getMessage, 404);
+      } else {
+        throw new Exception($e->getMessage, 500);
+      }
+    }
   }
   private function _controlerPoubelles() {
     switch ($this->_requestMethod) {
@@ -186,7 +195,15 @@ class Restful {
 
   }
   private function _controlerSupprimerPoubelles() {
-
+    try {
+      return $this->_poubelle->supprimerPoubelle($this->_resourceId);
+    } catch(Exception $e) {
+      if($e->getCode() == 1) {
+        throw new Exception($e->getMessage, 404);
+      } else {
+        throw new Exception($e->getMessage, 500);
+      }
+    }
   }
   private function _controlerVuePoubelle() {
     try {
@@ -216,7 +233,6 @@ class Restful {
           }
         case 'DELETE':
           return $this->_controlerSupprimerStockage();
-          break;
         default:
           throw new Exception('Method Not Allowed');
           break;
@@ -238,7 +254,15 @@ class Restful {
 
   }
   private function _controlerSupprimerStockage() {
-
+    try {
+      return $this->_stockage->supprimerStockage($this->_resourceId);
+    } catch(Exception $e) {
+      if($e->getCode() == 1) {
+        throw new Exception($e->getMessage, 404);
+      } else {
+        throw new Exception($e->getMessage, 500);
+      }
+    }
   }
   private function _controlerVueStockage() {
     try {

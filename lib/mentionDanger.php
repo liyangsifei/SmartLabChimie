@@ -5,7 +5,7 @@ class MentionDanger {
     $this->_db = $_db;
   }
   public function getListeMentionDanger() {
-    $sql = 'SELECT * FROM `mention_danger`';
+    $sql = "SELECT distinct(code), phrase FROM `mention_danger` ORDER BY code ASC";
     $stmt = $this->_db->prepare($sql);
     $stmt->execute();
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);

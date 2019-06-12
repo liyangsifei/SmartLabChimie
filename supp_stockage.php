@@ -29,27 +29,40 @@
 	          		<br />
 	            	<h3>Sélectionnez le(s) stockage(s) à supprimer : </h3>
 	            	<?php
+                require __DIR__.'/tools/cURL.php';
+                $data = curlGet(stockagesURL);
+                $data = json_decode($data,true);
+                echo "<table id='t_produits'>";
+                if(empty($data)) {
+                  echo '<a href="./form_stockage.php">Pas de stockage dans la base de données, cliquez ici pour en ajouter.</a>';
+                } else {
+                  echo '<tr><td>Type</td><td>Nom</td><td>Salle</td><td>Supprimer?</td></tr>';
+                  for($ind=0;$ind<count($data);$ind++) {
+                    echo "<tr><td>".$data[$ind]['type_stockage']."</td><td>".$data[$ind]['nom_stockage']."</td><td>".$data[$ind]['salle']."</td><td>";
+                    echo "<input type='checkbox' name='suppression' value=".$data[$ind]['ID']." ></td><tr>";
+                  }
+                }
+                echo "</table>";
+/*
 	            		require 'mysql_connect.php';
-
 	            		$req_nom_stockage = "SELECT nom_stockage, salle, type_stockage FROM stockage";
-						$res_nom_stockage = mysqli_query($connection, $req_nom_stockage);
-
-						echo "<table id='t_produits'>";
-                            // si il n'y a rien dans la bd
-                        if (!mysqli_num_rows($res_nom_stockage)){
-                            echo '<a href="./form_stockage.php">Pas de stockage dans la base de données, cliquez ici pour en ajouter.</a>';
-                        }
-						while($res_nom = mysqli_fetch_assoc($res_nom_stockage)) {
-						    echo "<tr><td>";
-                            echo $res_nom['type_stockage'];
-						    echo "</td><td>";
-                            echo $res_nom['nom_stockage'];
-                            echo "</td><td>";
-                            echo $res_nom['salle'];
-                            echo "</td><td>";
-                            echo "<input type='checkbox' name='suppression' value=".$res_nom['nom_stockage']." ></td><tr>";
-						}
-						echo "</table>";
+						      $res_nom_stockage = mysqli_query($connection, $req_nom_stockage);
+                  echo "<table id='t_produits'>";
+                  // si il n'y a rien dans la bd
+                  if (!mysqli_num_rows($res_nom_stockage)){
+                    echo '<a href="./form_stockage.php">Pas de stockage dans la base de données, cliquez ici pour en ajouter.</a>';
+                  }
+                  while($res_nom = mysqli_fetch_assoc($res_nom_stockage)) {
+                    echo "<tr><td>";
+                    echo $res_nom['type_stockage'];
+                    echo "</td><td>";
+                    echo $res_nom['nom_stockage'];
+                    echo "</td><td>";
+                    echo $res_nom['salle'];
+                    echo "</td><td>";
+                    echo "<input type='checkbox' name='suppression' value=".$res_nom['nom_stockage']." ></td><tr>";
+                  }
+                  echo "</table>";*/
 	            	?>
             	<input type="submit" name="form_supp_poubelle" value="Supprimer les stockages sélectionnées">
             	</form>
