@@ -20,8 +20,6 @@ class Mail {
       'message' => $message
     ];
   }
-  public function supprimerMail($id) {
-  }
   public function getListeMail() {
     $sql = 'SELECT * FROM `mail`';
     $stmt = $this->_db->prepare($sql);

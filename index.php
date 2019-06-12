@@ -21,7 +21,6 @@
         </header>
 
         <main class="index">
-
             <form method="get" action="fiche_simplifiee.php" class="recherche">
                 <input type="text" name="recherche_produit" placeholder="Nom du produit..." list="nom_produit" required>
                 <datalist id="nom_produit" >
@@ -66,6 +65,9 @@
             <div class="melange">
                 <form methode="GET" action="melange.php" class="melange">
                     <input type="submit" value="Créer un nouveau mélange">
+                </form><br/>
+                <form methode="GET" action="capteur_poubelle.php" class="melange">
+                    <input type="submit" value="Capteurs">
                 </form>
             </div>
         </main>

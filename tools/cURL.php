@@ -7,6 +7,7 @@ define("conseilPrudencesURL","http://127.0.0.1/Chimie/conseilPrudences/");
 define("pictogrammeSecuritesURL","http://127.0.0.1/Chimie/pictogrammeSecurites/");
 define("pictogrammePrecautionsURL","http://127.0.0.1/Chimie/pictogrammePrecautions/");
 define("mailsURL","http://127.0.0.1/Chimie/mails/");
+define("capteurPoubellesURL","http://127.0.0.1/Chimie/capteurPoubelles/");
 function curlGet($url) {
   $curl = curl_init();
   curl_setopt($curl, CURLOPT_URL, $url);
