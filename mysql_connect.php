@@ -2,7 +2,7 @@
 
 $servername = "127.0.0.1";
 $username = "root";
-$password = "root";
+$password = "";
 $dbname = "chimie";
 
 
@@ -22,7 +22,7 @@ if(!$connection)
 
 if (!mysqli_select_db ($connection,'chimie'))
 {
-	echo 'Base de connées non selectionnée';
+	echo 'Base de données non selectionnée';
 }
 
 ?>

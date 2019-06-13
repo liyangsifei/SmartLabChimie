@@ -163,7 +163,7 @@ class Restful {
   private function _controlerModifierProduit() {
     $body = $this->_getBodyParams();
     try {
-      $produit = $this->_produit->modifierProduit($body['designation_francaise'], $body['designation_anglaise'], $body['designation_scientifique'],
+      $produit = $this->_produit->modifierProduit($this->_resourceId, $body['designation_francaise'], $body['designation_anglaise'], $body['designation_scientifique'],
       $body['formule_brute'], $body['type_produit'], $body['quantite'], $body['commentaire_libre'], $body['fournisseur'], $body['masse_molaire'],
       $body['densite'], $body['temp_fusion_celsius'], $body['indice_optique'], $body['num_cas'], $body['pictogramme_securite'],
       $body['pictogramme_precaution'], $body['auteur'], $body['melange_dangereux'], $body['stockage'], $body['poubelle'],
@@ -220,7 +220,7 @@ class Restful {
   private function _controlerModifierPoubelles() {
     $body = $this->_getBodyParams();
     try {
-      $poubelle = $this->_poubelle->modifierPoubelle($body['nom'], $body['salle']);
+      $poubelle = $this->_poubelle->modifierPoubelle($this->_resourceId, $body['nom'], $body['salle']);
       return $poubelle;
     } catch(Exception $e) {
       if(!in_array($e->getCode(),[1,2])) {
@@ -288,7 +288,7 @@ class Restful {
   private function _controlerModifierStockage() {
     $body = $this->_getBodyParams();
     try {
-      $stockage = $this->_stockage->modifierStockage($body['salle'], $body['type'],$body['nom'], $body['etagere'],$body['recipient']);
+      $stockage = $this->_stockage->modifierStockage($this->_resourceId, $body['salle'], $body['type'],$body['nom'], $body['etagere'],$body['recipient']);
       return $stockage;
     } catch(Exception $e) {
       if(!in_array($e->getCode(),[1,2])) {
