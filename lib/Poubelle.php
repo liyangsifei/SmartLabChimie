@@ -18,7 +18,20 @@ class Poubelle {
       'salle' => $salle
     ];
   }
-  public function modifierPoubelle($id,$valeur,$type) {
+  public function modifierPoubelle($id, $nom, $salle) {
+    $sql = "UPDATE `poubelle` SET `nom`=:nom, `salle`=:salle WHERE `ID`=:id";
+    $stmt = $this->_db->prepare($sql);
+    $stmt->bindParam(':id',$id);
+    $stmt->bindParam(':nom',$nom);
+    $stmt->bindParam(':salle',$salle);
+    if (!$stmt->execute()) {
+      throw new Exception('ERROR', 1);
+    }
+    return [
+      'id' => $id,
+      'nom' => $nom,
+      'salle' => $salle
+    ];
   }
   public function supprimerPoubelle($id) {
     $sql = 'DELETE FROM `poubelle` WHERE `ID`='.$id;

@@ -8,6 +8,8 @@ define("pictogrammeSecuritesURL","http://127.0.0.1/Chimie/pictogrammeSecurites/"
 define("pictogrammePrecautionsURL","http://127.0.0.1/Chimie/pictogrammePrecautions/");
 define("mailsURL","http://127.0.0.1/Chimie/mails/");
 define("capteurPoubellesURL","http://127.0.0.1/Chimie/capteurPoubelles/");
+define("melangesURL","http://127.0.0.1/Chimie/melanges/");
+
 function curlGet($url) {
   $curl = curl_init();
   curl_setopt($curl, CURLOPT_URL, $url);
@@ -37,7 +39,14 @@ function curlPost($url, $data) {
 }
 
 function curlPut($url, $data) {
-
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_URL, $url);
+  curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PUT');
+  curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+  curl_setopt($curl, CURLOPT_HEADER, 0);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+  $output = curl_exec($curl);
+  curl_close ($curl);
 }
 
 function curlDelete($url) {

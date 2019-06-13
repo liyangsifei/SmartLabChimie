@@ -24,7 +24,26 @@
         'recipient' => $recipient
       ];
     }
-    public function modifierStockage($id,$valeur,$type) {
+    public function modifierStockage($id, $salle, $type, $nom, $etagere, $recipient) {
+      $sql = 'UPDATE `stockage` SET `salle`=:salle, `type_stockage`=:type, `nom_stockage`=:nom_s, `étagère`=:etagere, `récipient`=:recipient WHERE `id`=:id';
+      $stmt = $this->_db->prepare($sql);
+      $stmt->bindParam(':salle',$salle);
+      $stmt->bindParam(':type',$type);
+      $stmt->bindParam(':nom',$nom);
+      $stmt->bindParam(':etagere',$etagere);
+      $stmt->bindParam(':recipient',$recipient);
+      $stmt->bindParam(':id',$id);
+      if (!$stmt->execute()) {
+        throw new Exception('ERROR', 1);
+      }
+      return [
+        'id' => $id,
+        'nom' => $nom,
+        'salle' => $salle,
+        'type' => $type,
+        'etagere' => $etagere,
+        'recipient' => $recipient
+      ];
     }
     public function supprimerStockage($id) {
       $sql = 'DELETE FROM `stockage` WHERE `ID`='.$id;
