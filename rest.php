@@ -72,7 +72,7 @@ class Restful {
       $params = explode('/', $path);
 
       $reqType1 = explode('.', $params[1]);
-      $this->_resourceName = $req1[1][0];
+      $this->_resourceName = $reqType1[1][0];
       if(!empty($reqType1[1][1])) {
         $this->_requestType = $reqType1[1][1];
         if(!in_array($this->_requestType, $this->_allowedRequestMediaType)){
@@ -84,7 +84,7 @@ class Restful {
       }
       if(!empty($params[2])) {
         $reqType2 = explode('.',$params[2]);
-        $this->_resourceId = $reqs[2][0];
+        $this->_resourceId = $reqType2[2][0];
         if(!empty($reqType2)) {
           $this->$_requestType = $reqType2[2][1];
           if(!in_array($this->_requestType, $this->_allowedRequestMediaType)){
