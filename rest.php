@@ -111,6 +111,7 @@ class Restful {
         $this->_tab($data);
         break;
       default :
+        echo 'no type';
         break;
     }
   }
