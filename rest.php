@@ -26,9 +26,10 @@ class Restful {
   private $_requestMethod;
   private $_resourceName;
   private $_resourceId;
+  private $_requestType = 'json';
   private $_allowedResources = ['produits','stockages','poubelles','conseilPrudences','mentionDangers','pictogrammeSecurites','pictogrammePrecautions','mails', 'capteurPoubelles','melanges'];
   private $_allowedRequestMethods = ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'];
-  private $_allowedRequestMediaType = ['JSON', 'XML', 'PDF'];
+  private $_allowedRequestMediaType = ['json', 'xml', 'pdf','tab'];
   private $_statusCodes = [
     200 => 'Ok',
     204 => 'No Content',
@@ -54,40 +55,7 @@ class Restful {
     try {
       $this->_setupRequestMethod();
       $this->_setupResourceName();
-      switch ($this->_resourceName) {
-        case 'produits':
-          $this->_json($this->_controlerProduits());
-          break;
-        case 'poubelles':
-          $this->_json($this->_controlerPoubelles());
-          break;
-        case 'stockages':
-          $this->_json($this->_controlerStockages());
-          break;
-        case 'mentionDangers':
-          $this->_json($this->_controlerMentionDangers());
-          break;
-        case 'conseilPrudences':
-          $this->_json($this->_controlerConseilPrudences());
-          break;
-        case 'pictogrammePrecautions':
-          $this->_json($this->_controlerPictogrammePrecautions());
-          break;
-        case 'pictogrammeSecurites':
-          $this->_json($this->_controlerPictogrammeSecurites());
-          break;
-        case 'mails':
-          $this->_json($this->_controlerMails());
-          break;
-        case 'capteurPoubelles':
-          $this->_json($this->_controlerCapteurPoubelles());
-          break;
-        case 'melanges':
-          $this->_json($this->_controlerMelanges());
-          break;
-        default:
-          throw new Exception("resource not allowed");
-      }
+      $this->_controlerMediaType($this->_controlerResourceName);
     } catch(Exception $e) {
       $this->_json(['error' => $e->getMessage()], $e->getCode());
     }
@@ -101,14 +69,74 @@ class Restful {
   private function _setupResourceName() {
     if(isset($_SERVER['PATH_INFO'])) {
       $path = $_SERVER['PATH_INFO'];
-      $params = explode('/',$path);
-      $this->_resourceName = $params[1];
+      $params = explode('/', $path);
+
+      $reqType1 = explode('.', $params[1]);
+      $this->_resourceName = $req1[1][0];
+      if(!empty($reqType1[1][1])) {
+        $this->_requestType = $reqType1[1][1];
+        if(!in_array($this->_requestType), $this->_allowedRequestMediaType)){
+          throw new Exception('requested type not allowed', 400);
+        }
+      }
       if(!in_array($this->_resourceName, $this->_allowedResources)) {
         throw new Exception('resource not allowed', 400);
       }
       if(!empty($params[2])) {
-        $this->_resourceId = $params[2];
+        $reqType2 = explode('.',$params[2]);
+        $this->_resourceId = $reqs[2][0];
+        if(!empty($reqType2)) {
+          $this->$_requestType = $reqType2[2][1];
+          if(!in_array($this->_requestType), $this->_allowedRequestMediaType)){
+            throw new Exception('requested type not allowed', 400);
+          }
+        }
+
       }
+    }
+  }
+  private function _controlerMediaType($data) {
+    switch ($this->_requestType) {
+      case 'json':
+        $this->_json($data);
+        break;
+      case 'xml':
+        $this->_xml($data);
+        break;
+      case 'pdf':
+        $this->_pdf($data);
+        break;
+      case 'tab':
+        $this->_tab($data);
+        break;
+      default :
+        break;
+    }
+  }
+  private function _controlerResourceName() {
+    switch ($this->_resourceName) {
+      case 'produits':
+        return $this->_controlerProduits();
+      case 'poubelles':
+        return $this->_controlerPoubelles();
+      case 'stockages':
+        return $this->_controlerStockages();
+      case 'mentionDangers':
+        return $this->_controlerMentionDangers();
+      case 'conseilPrudences':
+        return $this->_controlerConseilPrudences();
+      case 'pictogrammePrecautions':
+        return $this->_controlerPictogrammePrecautions();
+      case 'pictogrammeSecurites':
+        return $this->_controlerPictogrammeSecurites();
+      case 'mails':
+        return $this->_controlerMails();
+      case 'capteurPoubelles':
+        return $this->_controlerCapteurPoubelles();
+      case 'melanges':
+        return $this->_controlerMelanges();
+      default:
+        throw new Exception("resource not allowed");
     }
   }
   private function _controlerProduits() {
@@ -588,6 +616,15 @@ class Restful {
     header('Content-Type:application/json;charset=utf-8');
     echo json_encode($array, JSON_UNESCAPED_UNICODE);
     exit();
+  }
+  private function _xml($array) {
+
+  }
+  private function _pdf($array) {
+
+  }
+  private function _tab($array) {
+    
   }
 }
 $produit = new Produit($pdo);
