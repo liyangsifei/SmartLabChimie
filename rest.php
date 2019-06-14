@@ -99,6 +99,7 @@ class Restful {
     switch ($this->_requestType) {
       case 'json':
         $this->_json($data);
+        echo 'type json';
         break;
       case 'xml':
         $this->_xml($data);
