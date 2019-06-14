@@ -55,7 +55,7 @@ class Restful {
     try {
       $this->_setupRequestMethod();
       $this->_setupResourceName();
-      $this->_controlerMediaType($this->_controlerResourceName);
+      $this->_controlerMediaType($this->_controlerResourceName());
     } catch(Exception $e) {
       $this->_json(['error' => $e->getMessage()], $e->getCode());
     }
