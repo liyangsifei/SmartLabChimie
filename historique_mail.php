@@ -40,7 +40,7 @@
             } else {
               echo '<tr><td>Send to</td><td>Date</td><td>Message</td></tr>';
               for($ind=0;$ind<count($data);$ind++) {
-                echo '<tr><td>'.$data[$ind]['mail_to'].'</td><td>'.$data['date'].'</td><td>'.$data['message'].'</td></tr>';
+                echo '<tr><td>'.$data[$ind]['mail_to'].'</td><td>'.$data[$ind]['date'].'</td><td>'.$data[$ind]['message'].'</td></tr>';
               }
             }
             echo '</table>'
