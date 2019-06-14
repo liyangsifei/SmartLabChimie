@@ -618,13 +618,13 @@ class Restful {
     exit();
   }
   private function _xml($array) {
-
+    
   }
   private function _pdf($array) {
 
   }
   private function _tab($array) {
-    
+
   }
 }
 $produit = new Produit($pdo);
