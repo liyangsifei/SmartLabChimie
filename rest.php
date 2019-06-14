@@ -87,7 +87,7 @@ class Restful {
         $this->_resourceId = $reqs[2][0];
         if(!empty($reqType2)) {
           $this->$_requestType = $reqType2[2][1];
-          if(!in_array($this->_requestType), $this->_allowedRequestMediaType)){
+          if(!in_array($this->_requestType, $this->_allowedRequestMediaType)){
             throw new Exception('requested type not allowed', 400);
           }
         }
