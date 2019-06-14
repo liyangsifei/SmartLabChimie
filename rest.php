@@ -75,7 +75,7 @@ class Restful {
       $this->_resourceName = $req1[1][0];
       if(!empty($reqType1[1][1])) {
         $this->_requestType = $reqType1[1][1];
-        if(!in_array($this->_requestType), $this->_allowedRequestMediaType)){
+        if(!in_array($this->_requestType, $this->_allowedRequestMediaType)){
           throw new Exception('requested type not allowed', 400);
         }
       }
@@ -618,7 +618,7 @@ class Restful {
     exit();
   }
   private function _xml($array) {
-    
+
   }
   private function _pdf($array) {
 
