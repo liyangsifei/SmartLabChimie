@@ -18,5 +18,12 @@ class MentionDanger {
     $data = $stmt->fetch(PDO::FETCH_ASSOC);
     return $data;
   }
+  public function getIdsMentionDanger() {
+    $sql = 'SELECT ID FROM `mention_danger`';
+    $stmt = $this->_db->prepare($sql);
+    $stmt->execute();
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $data;
+  }
 }
  ?>

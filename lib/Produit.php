@@ -102,6 +102,14 @@ $autheur, $melange_dangereux, $stockage, $poubelle, $qr_data, $mention_danger, $
     return $data;
   }
 
+  public function getIdsProduit() {
+    $sql = 'SELECT code_produit FROM `produit`';
+    $stmt = $this->_db->prepare($sql);
+    $stmt->execute();
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $data;
+  }
+
   public function getProduit($id) {
     $sql = 'SELECT * FROM `produit` WHERE `code_produit`='.$id;
     $stmt = $this->_db->prepare($sql);

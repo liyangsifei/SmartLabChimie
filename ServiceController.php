@@ -153,7 +153,75 @@ class ServiceController {
     }
   }
   private function _controlerLinkedService($data) {
-
+    switch($data) {
+      case 'produits':
+        $ids = $this->_produit->getIdsProduit();
+        return $this->_linkedServiceGetPutPutDelete($data, $ids);
+      case 'poubelles':
+        $ids = $this->_poubelle->getIdsPoubelle();
+        return $this->_linkedServiceGetPutPutDelete($data, $ids);
+      case 'stockages':
+        $ids = $this->_stockage->getIdsStockage();
+        return $this->_linkedServiceGetPutPutDelete($data, $ids);
+      case 'mentionDangers':
+        $ids = $this->_mentionDanger->getIdsMentionDanger();
+        return $this->_linkedServiceGet($data, $ids);
+      case 'conseilPrudences':
+        $ids = $this->_conseilPrudence->getIdsConseilPrudence();
+        return $this->_linkedServiceGet($data, $ids);
+      case 'pictogrammePrecautions':
+        $ids = $this->_pictogrammePrecaution->getIdsPictogrammePrecaution();
+        return $this->_linkedServiceGet($data, $ids);
+      case 'pictogrammeSecurites':
+        $ids = $this->_pictogrammeSecurite->getIdsPictogrammeSecurite();
+        return $this->_linkedServiceGet($data, $ids);
+      case 'mails':
+        $ids = $this->_mail->getIdsMail();
+        return $this->_linkedServiceGetPost($data, $ids);
+      case 'capteurPoubelles':
+        $ids = $this->_capteurPoubelle->getIdsCapteurPoubelle();
+        return $this->_linkedServiceGetPost($data, $ids);
+      case 'melanges':
+        $ids = $this->_melange->getIdsMelange();
+        return $this->_linkedServiceGetPutPutDelete($data, $ids);
+      default:
+        throw new Exception("resource not allowed");
+    }
+  }
+  private function _linkedServiceGetPutPutDelete($data, $ids) {
+    $array = ["GET"=>["http://127.0.0.1/Chimie/".$data."/list"], "POST"=>"http://127.0.0.1/Chimie/".$data."/", "PUT"=>[], "DELETE"=>[]];
+    $ind = 1;
+    foreach($ids as $key => $value) {
+      foreach($value as $key2 => $value2) {
+        $array["GET"][$ind] = "http://127.0.0.1/Chimie/".$data."/".$value2."/";
+        $array["PUT"][$ind] = "http://127.0.0.1/Chimie/".$data."/".$value2."/";
+        $array["DELETE"][$ind] = "http://127.0.0.1/Chimie/".$data."/".$value2."/";
+      }
+      $ind = $ind+1;
+    }
+    return $array;
+  }
+  private function _linkedServiceGet($data, $ids) {
+    $array = ["GET"=>["http://127.0.0.1/Chimie/".$data."/list"]];
+    $ind = 1;
+    foreach($ids as $key => $value) {
+      foreach($value as $key2 => $value2) {
+        $array["GET"][$ind] = "http://127.0.0.1/Chimie/".$data."/".$value2."/";
+      }
+      $ind = $ind+1;
+    }
+    return $array;
+  }
+  private function _linkedServiceGetPost($data, $ids) {
+    $array = ["GET"=>["http://127.0.0.1/Chimie/".$data."/list"], "POST"=>"http://127.0.0.1/Chimie/".$data."/"];
+    $ind = 1;
+    foreach($ids as $key => $value) {
+      foreach($value as $key2 => $value2) {
+        $array["GET"][$ind] = "http://127.0.0.1/Chimie/".$data."/".$value2."/";
+      }
+      $ind = $ind+1;
+    }
+    return $array;
   }
   private function _controlerProduits() {
     switch ($this->_requestMethod) {
@@ -163,7 +231,7 @@ class ServiceController {
         return $this->_controlerModifierProduit();
       case 'GET':
         if (empty($this->_resourceId)) {
-            return $this->_controlerLinkedService('produit');
+            return $this->_controlerLinkedService('produits');
         } else if($this->_resourceId=='list') {
           return $this->_controlerListeProduit();
         } else {
@@ -241,7 +309,7 @@ class ServiceController {
         return $this->_controlerModifierPoubelles();
       case 'GET':
         if (empty($this->_resourceId)) {
-            return $this->_controlerLinkedService('poubelle');
+            return $this->_controlerLinkedService('poubelles');
         } else if($this->_resourceId=='list') {
           return $this->_controlerListePoubelle();
         } else {
@@ -310,7 +378,7 @@ class ServiceController {
           return $this->_controlerModifierStockage();
         case 'GET':
           if (empty($this->_resourceId)) {
-            return $this->_controlerLinkedService('stockage');
+            return $this->_controlerLinkedService('stockages');
           } else if($this->_resourceId=='list') {
             return $this->_controlerListeStockage();
           } else {
@@ -378,7 +446,7 @@ class ServiceController {
         return $this->_controlerCreerMail();
       case 'GET':
         if (empty($this->_resourceId)) {
-            return $this->_controlerLinkedService('poubelle');
+            return $this->_controlerLinkedService('mails');
         } else if($this->_resourceId=='list') {
           return $this->_controlerListeMail();
         } else {
@@ -419,7 +487,7 @@ class ServiceController {
   private function _controlerMentionDangers() {
     if($this->_requestMethod=='GET'){
       if (empty($this->_resourceId)) {
-          return $this->_controlerLinkedService('mentionDanger');
+          return $this->_controlerLinkedService('mentionDangers');
       } else if($this->_resourceId=='list') {
         return $this->_controlerListeMentionDanger();
       } else {
@@ -446,7 +514,7 @@ class ServiceController {
   private function _controlerConseilPrudences() {
     if($this->_requestMethod=='GET'){
       if (empty($this->_resourceId)) {
-        return $this->_controlerLinkedService('conseilPrudence');
+        return $this->_controlerLinkedService('conseilPrudences');
       } else if($this->_resourceId=='list') {
         return $this->_controlerListeConseilPrudence();
       } else {
@@ -473,7 +541,7 @@ class ServiceController {
   private function _controlerPictogrammePrecautions() {
     if($this->_requestMethod=='GET'){
       if (empty($this->_resourceId)) {
-        return $this->_controlerLinkedService('pictogrammePrecaution');
+        return $this->_controlerLinkedService('pictogrammePrecautions');
       } else if($this->_resourceId=='list') {
         return $this->_controlerListePictogrammePrecaution();
       } else {
@@ -500,7 +568,7 @@ class ServiceController {
   private function _controlerPictogrammeSecurites() {
     if($this->_requestMethod=='GET'){
       if (empty($this->_resourceId)) {
-        return $this->_controlerLinkedService('pictorammeSecurite');
+        return $this->_controlerLinkedService('pictorammeSecurites');
       } else if($this->_resourceId=='list') {
         return $this->_controlerListePictogrammeSecurite();
       } else {
@@ -530,7 +598,7 @@ class ServiceController {
         return $this->_controlerCreerCapteurPoubelle();
       case 'GET':
         if (empty($this->_resourceId)) {
-          return $this->_controlerLinkedService('capteurPoubelle');
+          return $this->_controlerLinkedService('capteurPoubelles');
         } else if($this->_resourceId=='list') {
           return $this->_controlerListeCapteurPoubelle();
         } else {
@@ -575,7 +643,7 @@ class ServiceController {
         return $this->_controlerModifierMelange();
       case 'GET':
         if (empty($this->_resourceId)) {
-          return $this->_controlerLinkedService('melange');
+          return $this->_controlerLinkedService('melanges');
         } else if($this->_resourceId=='list') {
           return $this->_controlerListeMelange();
         } else {

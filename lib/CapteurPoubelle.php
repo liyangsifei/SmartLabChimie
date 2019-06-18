@@ -20,6 +20,13 @@ Class CapteurPoubelle {
       'statut' => $statut
     ];
   }
+  public function getIdsCapteurPoubelle() {
+    $sql = 'SELECT id FROM `capteur_poubelle`';
+    $stmt = $this->_db->prepare($sql);
+    $stmt->execute();
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $data;
+  }
   public function getListeCapteurPoubelle() {
     $sql = 'SELECT * FROM `capteur_poubelle`';
     $stmt = $this->_db->prepare($sql);

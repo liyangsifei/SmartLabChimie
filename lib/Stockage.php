@@ -57,6 +57,13 @@
       $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
       return $data;
     }
+    public function getIdsStockage() {
+      $sql = 'SELECT ID FROM `stockage`';
+      $stmt = $this->_db->prepare($sql);
+      $stmt->execute();
+      $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $data;
+    }
     public function getStockage($id) {
       $sql = 'SELECT * FROM `stockage` WHERE `ID`='.$id;
       $stmt = $this->_db->prepare($sql);

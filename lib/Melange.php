@@ -63,6 +63,13 @@ class Melange {
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $data;
   }
+  public function getIdsMelange() {
+    $sql = 'SELECT ID FROM `melange`';
+    $stmt = $this->_db->prepare($sql);
+    $stmt->execute();
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $data;
+  }
   public function getMelange($id) {
     $sql = 'SELECT * FROM `melange` WHERE `ID`='.$id;
     $stmt = $this->_db->prepare($sql);

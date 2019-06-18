@@ -47,6 +47,13 @@ class Poubelle {
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $data;
   }
+  public function getIdsPoubelle() {
+    $sql = 'SELECT ID FROM `poubelle`';
+    $stmt = $this->_db->prepare($sql);
+    $stmt->execute();
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $data;
+  }
   public function getPoubelle($id) {
     $sql = 'SELECT * FROM `poubelle` WHERE `ID`='.$id;
     $stmt = $this->_db->prepare($sql);
