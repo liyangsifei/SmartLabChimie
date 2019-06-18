@@ -30,7 +30,7 @@
 	            	<h3>Sélectionnez le(s) poubelle(s) à supprimer : </h3>
 	            	<?php
                   require __DIR__.'/tools/cURL.php';
-                  $data = curlGet(poubellesURL);
+                  $data = curlGet(poubellesURL.'list/');
                   $data = json_decode($data,true);
                   echo "<table id='t_produits'>";
                   if(empty($data)) {

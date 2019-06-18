@@ -50,11 +50,12 @@ class ServiceController {
     $this->_pictogrammePrecaution = $_pictogrammePrecaution;
     $this->_mail = $_mail;
     $this->_capteurPoubelle = $_capteurPoubelle;
+    $this->_melange = $_melange;
   }
   public function run() {
     try {
       $this->_setupRequestMethod();
-      $this->_setupResourceName();
+      $this->_setupResourceURI();
       $this->_controlerMediaType($this->_controlerResourceName());
     } catch(Exception $e) {
       $this->_json(['error' => $e->getMessage()], $e->getCode());
@@ -66,7 +67,7 @@ class ServiceController {
       throw new Exception('method not allowed', 405);
     }
   }
-  private function _setupResourceName() {
+  private function _setupResourceURI() {
     if(isset($_SERVER['PATH_INFO'])) {
       $path = $_SERVER['PATH_INFO'];
       $params = explode('/', $path);
@@ -83,15 +84,25 @@ class ServiceController {
         throw new Exception('resource not allowed', 400);
       }
       if(!empty($params[2])) {
-        $reqType2 = explode('.',$params[2]);
-        $this->_resourceId = $reqType2[0];
-        if(!empty($reqType2[1])) {
-          $this->$_requestType = $reqType2[1];
-          if(!in_array($this->_requestType, $this->_allowedRequestMediaType)){
-            throw new Exception('requested type not allowed', 400);
+        if(strstr($params[2],'list')) {
+          $reqType2 = explode('.',$params[2]);
+          $this->_resourceId = $reqType2[0];
+          if(!empty($reqType2[1])) {
+            $this->_requestType = $reqType2[1];
+            if(!in_array($this->_requestType, $this->_allowedRequestMediaType)){
+              throw new Exception('requested type not allowed', 400);
+            }
+          }
+        } else {
+          $reqType2 = explode('.',$params[2]);
+          $this->_resourceId = $reqType2[0];
+          if(!empty($reqType2[1])) {
+            $this->_requestType = $reqType2[1];
+            if(!in_array($this->_requestType, $this->_allowedRequestMediaType)){
+              throw new Exception('requested type not allowed', 400);
+            }
           }
         }
-
       }
     }
   }
@@ -102,7 +113,7 @@ class ServiceController {
         echo 'type json';
         break;
       case 'xml':
-        $this->_xml($data);
+        $this->_xml($data, $this->_resourceName, $this->_resourceId);
         break;
       case 'pdf':
         $this->_pdf($data);
@@ -141,6 +152,9 @@ class ServiceController {
         throw new Exception("resource not allowed");
     }
   }
+  private function _controlerLinkedService($data) {
+
+  }
   private function _controlerProduits() {
     switch ($this->_requestMethod) {
       case 'POST':
@@ -149,6 +163,8 @@ class ServiceController {
         return $this->_controlerModifierProduit();
       case 'GET':
         if (empty($this->_resourceId)) {
+            return $this->_controlerLinkedService('produit');
+        } else if($this->_resourceId=='list') {
           return $this->_controlerListeProduit();
         } else {
           return $this->_controlerVueProduit();
@@ -225,6 +241,8 @@ class ServiceController {
         return $this->_controlerModifierPoubelles();
       case 'GET':
         if (empty($this->_resourceId)) {
+            return $this->_controlerLinkedService('poubelle');
+        } else if($this->_resourceId=='list') {
           return $this->_controlerListePoubelle();
         } else {
           return $this->_controlerVuePoubelle();
@@ -292,6 +310,8 @@ class ServiceController {
           return $this->_controlerModifierStockage();
         case 'GET':
           if (empty($this->_resourceId)) {
+            return $this->_controlerLinkedService('stockage');
+          } else if($this->_resourceId=='list') {
             return $this->_controlerListeStockage();
           } else {
             return $this->_controlerVueStockage();
@@ -358,6 +378,8 @@ class ServiceController {
         return $this->_controlerCreerMail();
       case 'GET':
         if (empty($this->_resourceId)) {
+            return $this->_controlerLinkedService('poubelle');
+        } else if($this->_resourceId=='list') {
           return $this->_controlerListeMail();
         } else {
           return $this->_controlerVueMail();
@@ -397,6 +419,8 @@ class ServiceController {
   private function _controlerMentionDangers() {
     if($this->_requestMethod=='GET'){
       if (empty($this->_resourceId)) {
+          return $this->_controlerLinkedService('mentionDanger');
+      } else if($this->_resourceId=='list') {
         return $this->_controlerListeMentionDanger();
       } else {
           return $this->_controlerVueMentionDanger();
@@ -422,6 +446,8 @@ class ServiceController {
   private function _controlerConseilPrudences() {
     if($this->_requestMethod=='GET'){
       if (empty($this->_resourceId)) {
+        return $this->_controlerLinkedService('conseilPrudence');
+      } else if($this->_resourceId=='list') {
         return $this->_controlerListeConseilPrudence();
       } else {
         return $this->_controlerVueConseilPrudence();
@@ -447,6 +473,8 @@ class ServiceController {
   private function _controlerPictogrammePrecautions() {
     if($this->_requestMethod=='GET'){
       if (empty($this->_resourceId)) {
+        return $this->_controlerLinkedService('pictogrammePrecaution');
+      } else if($this->_resourceId=='list') {
         return $this->_controlerListePictogrammePrecaution();
       } else {
         return $this->_controlerVuePictogrammePrecaution();
@@ -472,6 +500,8 @@ class ServiceController {
   private function _controlerPictogrammeSecurites() {
     if($this->_requestMethod=='GET'){
       if (empty($this->_resourceId)) {
+        return $this->_controlerLinkedService('pictorammeSecurite');
+      } else if($this->_resourceId=='list') {
         return $this->_controlerListePictogrammeSecurite();
       } else {
         return $this->_controlerVuePictogrammeSecurite();
@@ -500,6 +530,8 @@ class ServiceController {
         return $this->_controlerCreerCapteurPoubelle();
       case 'GET':
         if (empty($this->_resourceId)) {
+          return $this->_controlerLinkedService('capteurPoubelle');
+        } else if($this->_resourceId=='list') {
           return $this->_controlerListeCapteurPoubelle();
         } else {
           return $this->_controlerVueCapteurPoubelle();
@@ -543,6 +575,8 @@ class ServiceController {
         return $this->_controlerModifierMelange();
       case 'GET':
         if (empty($this->_resourceId)) {
+          return $this->_controlerLinkedService('melange');
+        } else if($this->_resourceId=='list') {
           return $this->_controlerListeMelange();
         } else {
           return $this->_controlerVueMelange();
@@ -557,7 +591,7 @@ class ServiceController {
   private function _controlerCreerMelange() {
     $body = $this->_getBodyParams();
     try {
-    $melange = $this->_melange->creerMelange(/* TODO:add attributs*/);
+    $melange = $this->_melange->creerMelange($body['nom_melange'], $body['nom_user'],$body['date_melange'], $body['nom_produit'], $body['concentration_melange'],$body['milieu']);
       return $melange;
     } catch(Exception $e) {
       if(!in_array($e->getCode(),[1,2])) {
@@ -569,7 +603,7 @@ class ServiceController {
   private function _controlerModifierMelange() {
     $body = $this->_getBodyParams();
     try {
-      $melange = $this->_melange->modifierMelange(/* TODO:add attributs*/);
+    $melange = $this->_melange->modifierMelange($this->_resourceId, $body['nom_melange'], $body['nom_user'],$body['date_melange'], $body['nom_produit'], $body['concentration_melange'],$body['milieu']);
       return $melange;
     } catch(Exception $e) {
       if(!in_array($e->getCode(),[1,2])) {
@@ -619,14 +653,53 @@ class ServiceController {
     echo json_encode($array, JSON_UNESCAPED_UNICODE);
     exit();
   }
-  private function _xml($array) {
-
+  private function _xml($array, $root, $list) {
+    $xml = '<?xml version="1.0" encoding="utf-8"?>';
+    $xml .= (strstr($list, 'list') ? '<'.$root.'>' : '<'.rtrim($root, "s").'>');
+    $xml .= $this-> data_to_xml($array, rtrim($root, "s"));
+    $xml .= (strstr($list, 'list') ? '</'.$root.'>' : '</'.rtrim($root, "s").'>');
+    echo $xml;
   }
   private function _pdf($array) {
-
+    print_r($array);
   }
   private function _tab($array) {
-
+    echo "<table>";
+    if(empty($array[0])) {
+      echo "<tr>";
+      foreach ($array as $key => $value) {
+        echo "<td>".$key."</td>";
+      }
+      echo "</tr>";
+      echo "<tr>";
+      foreach ($array as $key => $value) {
+        echo "<td>".$value."</td>";
+      }
+      echo "</tr>";
+    } else {
+      echo "<tr>";
+      foreach ($array[0] as $key => $value) {
+        echo "<td>".$key."</td>";
+      }
+      echo "</tr>";
+      foreach ($array as $key => $value) {
+        echo "<tr>";
+        foreach ($value as $key2 => $value2) {
+          echo "<td>".$value2."</td>";
+        }
+        echo "</tr>";
+      }
+    }
+    echo "</table>";
+  }
+  private function data_to_xml($data, $type) {
+    $xml = "";
+    foreach($data as $key => $value) {
+      $xml .= (is_numeric($key) ? "<".$type.">" : "<".$key.">");
+      $xml .= (is_array($value) || is_object($value) ? $this -> data_to_xml($value, $type) : $value);
+      $xml .= (is_numeric($key) ? "</".$type.">" : "</".$key.">");
+    }
+    return $xml;
   }
 }
 $produit = new Produit($pdo);

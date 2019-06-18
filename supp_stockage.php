@@ -30,7 +30,7 @@
 	            	<h3>Sélectionnez le(s) stockage(s) à supprimer : </h3>
 	            	<?php
                 require __DIR__.'/tools/cURL.php';
-                $data = curlGet(stockagesURL);
+                $data = curlGet(stockagesURL.'list/');
                 $data = json_decode($data,true);
                 echo "<table id='t_produits'>";
                 if(empty($data)) {
