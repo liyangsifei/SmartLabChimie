@@ -7,8 +7,6 @@ require __DIR__.'/lib/mentionDanger.php';
 require __DIR__.'/lib/pictogrammePrecaution.php';
 require __DIR__.'/lib/pictogrammeSecurite.php';
 require __DIR__.'/lib/mail.php';
-require __DIR__.'/lib/CapteurPoubelle.php';
-require __DIR__.'/lib/Melange.php';
 $pdo = require __DIR__.'/tools/db.php';
 class Restful {
   private $_produit;
@@ -19,17 +17,13 @@ class Restful {
   private $_pictogrammePrecaution;
   private $_pictogrammeSecurite;
   private $_mail;
-  private $_melange;
-
-  private $_capteurPoubelle;
 
   private $_requestMethod;
   private $_resourceName;
   private $_resourceId;
-  private $_requestType = 'json';
-  private $_allowedResources = ['produits','stockages','poubelles','conseilPrudences','mentionDangers','pictogrammeSecurites','pictogrammePrecautions','mails', 'capteurPoubelles','melanges'];
+  private $_allowedResources = ['produits','stockages','poubelles','conseilPrudences','mentionDangers','pictogrammeSecurites','pictogrammePrecautions','mails'];
   private $_allowedRequestMethods = ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'];
-  private $_allowedRequestMediaType = ['json', 'xml', 'pdf','tab'];
+  private $_allowedRequestMediaType = ['JSON', 'XML', 'PDF'];
   private $_statusCodes = [
     200 => 'Ok',
     204 => 'No Content',
@@ -40,7 +34,7 @@ class Restful {
     405 => 'Method Not Allowed',
     500 => 'Server Internal Error'
   ];
-  public function __construct(Produit $_produit, Stockage $_stockage, Poubelle $_poubelle, MentionDanger $_mentionDanger, ConseilPrudence $_conseilPrudence, PictogrammeSecurite $_pictogrammeSecurite, PictogrammePrecaution $_pictogrammePrecaution, Mail $_mail, CapteurPoubelle $_capteurPoubelle, Melange $_melange) {
+  public function __construct(Produit $_produit, Stockage $_stockage, Poubelle $_poubelle, MentionDanger $_mentionDanger, ConseilPrudence $_conseilPrudence, PictogrammeSecurite $_pictogrammeSecurite, PictogrammePrecaution $_pictogrammePrecaution, Mail $_mail) {
     $this->_produit = $_produit;
     $this->_stockage = $_stockage;
     $this->_poubelle = $_poubelle;
@@ -49,13 +43,39 @@ class Restful {
     $this->_pictogrammeSecurite = $_pictogrammeSecurite;
     $this->_pictogrammePrecaution = $_pictogrammePrecaution;
     $this->_mail = $_mail;
-    $this->_capteurPoubelle = $_capteurPoubelle;
   }
   public function run() {
     try {
       $this->_setupRequestMethod();
       $this->_setupResourceName();
-      $this->_controlerMediaType($this->_controlerResourceName());
+      switch ($this->_resourceName) {
+        case 'produits':
+          $this->_json($this->_controlerProduits());
+          break;
+        case 'poubelles':
+          $this->_json($this->_controlerPoubelles());
+          break;
+        case 'stockages':
+          $this->_json($this->_controlerStockages());
+          break;
+        case 'mentionDangers':
+          $this->_json($this->_controlerMentionDangers());
+          break;
+        case 'conseilPrudences':
+          $this->_json($this->_controlerConseilPrudences());
+          break;
+        case 'pictogrammePrecautions':
+          $this->_json($this->_controlerPictogrammePrecautions());
+          break;
+        case 'pictogrammeSecurites':
+          $this->_json($this->_controlerPictogrammeSecurites());
+          break;
+        case 'mails':
+          $this->_json($this->_controlerMails());
+          break;
+        default:
+          throw new Exception("resource not allowed");
+      }
     } catch(Exception $e) {
       $this->_json(['error' => $e->getMessage()], $e->getCode());
     }
@@ -69,76 +89,14 @@ class Restful {
   private function _setupResourceName() {
     if(isset($_SERVER['PATH_INFO'])) {
       $path = $_SERVER['PATH_INFO'];
-      $params = explode('/', $path);
-
-      $reqType1 = explode('.', $params[1]);
-      $this->_resourceName = $reqType1[0];
-      if(!empty($reqType1[1])) {
-        $this->_requestType = $reqType1[1];
-        if(!in_array($this->_requestType, $this->_allowedRequestMediaType)){
-          throw new Exception('requested type not allowed', 400);
-        }
-      }
+      $params = explode('/',$path);
+      $this->_resourceName = $params[1];
       if(!in_array($this->_resourceName, $this->_allowedResources)) {
         throw new Exception('resource not allowed', 400);
       }
       if(!empty($params[2])) {
-        $reqType2 = explode('.',$params[2]);
-        $this->_resourceId = $reqType2[0];
-        if(!empty($reqType2[1])) {
-          $this->$_requestType = $reqType2[1];
-          if(!in_array($this->_requestType, $this->_allowedRequestMediaType)){
-            throw new Exception('requested type not allowed', 400);
-          }
-        }
-
+        $this->_resourceId = $params[2];
       }
-    }
-  }
-  private function _controlerMediaType($data) {
-    switch ($this->_requestType) {
-      case 'json':
-        $this->_json($data);
-        echo 'type json';
-        break;
-      case 'xml':
-        $this->_xml($data);
-        break;
-      case 'pdf':
-        $this->_pdf($data);
-        break;
-      case 'tab':
-        $this->_tab($data);
-        break;
-      default :
-        echo 'no type';
-        break;
-    }
-  }
-  private function _controlerResourceName() {
-    switch ($this->_resourceName) {
-      case 'produits':
-        return $this->_controlerProduits();
-      case 'poubelles':
-        return $this->_controlerPoubelles();
-      case 'stockages':
-        return $this->_controlerStockages();
-      case 'mentionDangers':
-        return $this->_controlerMentionDangers();
-      case 'conseilPrudences':
-        return $this->_controlerConseilPrudences();
-      case 'pictogrammePrecautions':
-        return $this->_controlerPictogrammePrecautions();
-      case 'pictogrammeSecurites':
-        return $this->_controlerPictogrammeSecurites();
-      case 'mails':
-        return $this->_controlerMails();
-      case 'capteurPoubelles':
-        return $this->_controlerCapteurPoubelles();
-      case 'melanges':
-        return $this->_controlerMelanges();
-      default:
-        throw new Exception("resource not allowed");
     }
   }
   private function _controlerProduits() {
@@ -191,20 +149,6 @@ class Restful {
       }
   }
   private function _controlerModifierProduit() {
-    $body = $this->_getBodyParams();
-    try {
-      $produit = $this->_produit->modifierProduit($this->_resourceId, $body['designation_francaise'], $body['designation_anglaise'], $body['designation_scientifique'],
-      $body['formule_brute'], $body['type_produit'], $body['quantite'], $body['commentaire_libre'], $body['fournisseur'], $body['masse_molaire'],
-      $body['densite'], $body['temp_fusion_celsius'], $body['indice_optique'], $body['num_cas'], $body['pictogramme_securite'],
-      $body['pictogramme_precaution'], $body['auteur'], $body['melange_dangereux'], $body['stockage'], $body['poubelle'],
-      $body['QR_code'], $body['mention_danger'], $body['conseil_prudence']);
-      return $produit;
-    } catch(Exception $e) {
-      if(!in_array($e->getCode(),[1,2])) {
-        throw new Exception($e->getMessage(), 400);
-      }
-      throw new Exception($e->getMessage(), 500);
-    }
   }
   private function _controlerSupprimerProduit() {
     try {
@@ -248,16 +192,7 @@ class Restful {
     }
   }
   private function _controlerModifierPoubelles() {
-    $body = $this->_getBodyParams();
-    try {
-      $poubelle = $this->_poubelle->modifierPoubelle($this->_resourceId, $body['nom'], $body['salle']);
-      return $poubelle;
-    } catch(Exception $e) {
-      if(!in_array($e->getCode(),[1,2])) {
-        throw new Exception($e->getMessage(), 400);
-      }
-      throw new Exception($e->getMessage(), 500);
-    }
+
   }
   private function _controlerSupprimerPoubelles() {
     try {
@@ -304,28 +239,19 @@ class Restful {
       }
   }
   private function _controlerCreerStockage() {
-    $body = $this->_getBodyParams();
-    try {
-      $stockage = $this->_stockage->creerStockage($body['salle'], $body['type'],$body['nom'], $body['etagere'],$body['recipient']);
-      return $stockage;
-    } catch(Exception $e) {
-      if(!in_array($e->getCode(),[1,2])) {
-        throw new Exception($e->getMessage(), 400);
+      $body = $this->_getBodyParams();
+      try {
+        $stockage = $this->_stockage->creerStockage($body['salle'], $body['type'],$body['nom'], $body['etagere'],$body['recipient']);
+        return $stockage;
+      } catch(Exception $e) {
+        if(!in_array($e->getCode(),[1,2])) {
+          throw new Exception($e->getMessage(), 400);
+        }
+        throw new Exception($e->getMessage(), 500);
       }
-      throw new Exception($e->getMessage(), 500);
-    }
   }
   private function _controlerModifierStockage() {
-    $body = $this->_getBodyParams();
-    try {
-      $stockage = $this->_stockage->modifierStockage($this->_resourceId, $body['salle'], $body['type'],$body['nom'], $body['etagere'],$body['recipient']);
-      return $stockage;
-    } catch(Exception $e) {
-      if(!in_array($e->getCode(),[1,2])) {
-        throw new Exception($e->getMessage(), 400);
-      }
-      throw new Exception($e->getMessage(), 500);
-    }
+
   }
   private function _controlerSupprimerStockage() {
     try {
@@ -356,12 +282,16 @@ class Restful {
     switch ($this->_requestMethod) {
       case 'POST':
         return $this->_controlerCreerMail();
+      case 'PUT':
+        return $this->_controlerModifierMail();
       case 'GET':
         if (empty($this->_resourceId)) {
           return $this->_controlerListeMail();
         } else {
           return $this->_controlerVueMail();
         }
+      case 'DELETE':
+        return $this->_controlerSupprimerMail();
       default:
         throw new Exception('Method Not Allowed');
         break;
@@ -378,6 +308,12 @@ class Restful {
       }
       throw new Exception($e->getMessage(), 500);
     }
+  }
+  private function _controlerModifierMail() {
+
+  }
+  private function _controlerSupprimerMail() {
+
   }
   private function _controlerVueMail() {
     try {
@@ -494,115 +430,6 @@ class Restful {
       }
     }
   }
-  private function _controlerCapteurPoubelles() {
-    switch ($this->_requestMethod) {
-      case 'POST':
-        return $this->_controlerCreerCapteurPoubelle();
-      case 'GET':
-        if (empty($this->_resourceId)) {
-          return $this->_controlerListeCapteurPoubelle();
-        } else {
-          return $this->_controlerVueCapteurPoubelle();
-        }
-      default:
-        throw new Exception('Method Not Allowed');
-        break;
-    }
-  }
-  private function _controlerCreerCapteurPoubelle() {
-    $body = $this->_getBodyParams();
-    try {
-      $capteurPoubelle = $this->_capteurPoubelle->creerCapteurPoubelle($body['id_poubelle'], $body['date'],$body['statut']);
-      return $capteurPoubelle;
-    } catch(Exception $e) {
-      if(!in_array($e->getCode(),[1,2])) {
-        throw new Exception($e->getMessage(), 400);
-      }
-      throw new Exception($e->getMessage(), 500);
-    }
-  }
-  private function _controlerListeCapteurPoubelle() {
-    return $this->_capteurPoubelle->getListeCapteurPoubelle();
-  }
-  private function _controlerVueCapteurPoubelle() {
-    try {
-      return $this->_capteurPoubelle->getCapteurPoubelle($this->_resourceId);
-    } catch(Exception $e) {
-      if($e->getCode() == 1) {
-        throw new Exception($e->getMessage, 404);
-      } else {
-        throw new Exception($e->getMessage, 500);
-      }
-    }
-  }
-  private function _controlerMelanges() {
-    switch ($this->_requestMethod) {
-      case 'POST':
-        return $this->_controlerCreerMelange();
-      case 'PUT':
-        return $this->_controlerModifierMelange();
-      case 'GET':
-        if (empty($this->_resourceId)) {
-          return $this->_controlerListeMelange();
-        } else {
-          return $this->_controlerVueMelange();
-        }
-      case 'DELETE':
-        return $this->_controlerSupprimerMelange();
-      default:
-        throw new Exception('Method Not Allowed');
-        break;
-    }
-  }
-  private function _controlerCreerMelange() {
-    $body = $this->_getBodyParams();
-    try {
-    $melange = $this->_melange->creerMelange(/* TODO:add attributs*/);
-      return $melange;
-    } catch(Exception $e) {
-      if(!in_array($e->getCode(),[1,2])) {
-        throw new Exception($e->getMessage(), 400);
-      }
-      throw new Exception($e->getMessage(), 500);
-    }
-  }
-  private function _controlerModifierMelange() {
-    $body = $this->_getBodyParams();
-    try {
-      $melange = $this->_melange->modifierMelange(/* TODO:add attributs*/);
-      return $melange;
-    } catch(Exception $e) {
-      if(!in_array($e->getCode(),[1,2])) {
-        throw new Exception($e->getMessage(), 400);
-      }
-      throw new Exception($e->getMessage(), 500);
-    }
-  }
-  private function _controlerListeMelange() {
-      return $this->_melange->getListeMelange();
-  }
-  private function _controlerVueMelange() {
-    try {
-      return $this->_melange->getMelange($this->_resourceId);
-    } catch(Exception $e) {
-      if($e->getCode() == 1) {
-        throw new Exception($e->getMessage, 404);
-      } else {
-        throw new Exception($e->getMessage, 500);
-      }
-    }
-  }
-  private function _controlerSupprimerMelange() {
-      try {
-        return $this->_melange->supprimerMelange($this->_resourceId);
-      } catch(Exception $e) {
-        if($e->getCode() == 1) {
-          throw new Exception($e->getMessage, 404);
-        } else {
-          throw new Exception($e->getMessage, 500);
-        }
-      }
-  }
   private function _getBodyParams() {
     $raw = file_get_contents('php://input');
     if(empty($raw)) {
@@ -619,15 +446,6 @@ class Restful {
     echo json_encode($array, JSON_UNESCAPED_UNICODE);
     exit();
   }
-  private function _xml($array) {
-
-  }
-  private function _pdf($array) {
-
-  }
-  private function _tab($array) {
-
-  }
 }
 $produit = new Produit($pdo);
 $stockage = new Stockage($pdo);
@@ -637,8 +455,6 @@ $conseilPrudence = new ConseilPrudence($pdo);
 $pictogrammeSecurite = new PictogrammeSecurite($pdo);
 $pictogrammePrecaution = new PictogrammePrecaution($pdo);
 $mail = new Mail($pdo);
-$capteurPoubelle = new CapteurPoubelle($pdo);
-$melange = new Melange($pdo);
-$restful = new Restful($produit, $stockage, $poubelle, $mentionDanger, $conseilPrudence, $pictogrammeSecurite, $pictogrammePrecaution, $mail, $capteurPoubelle, $melange);
+$restful = new Restful($produit, $stockage, $poubelle, $mentionDanger, $conseilPrudence, $pictogrammeSecurite, $pictogrammePrecaution, $mail);
 $restful->run();
  ?>

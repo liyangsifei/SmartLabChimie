@@ -1,5 +1,9 @@
 <?php
-ini_set("SMTP", "127.0.0.1");
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/autoload.php';
 
 $nom_produit = isset($_POST['nom_produit']) ? $_POST['nom_produit'] : '';
 $r_bug = isset($_POST['r_bug']) ? $_POST['r_bug'] : '';
@@ -12,32 +16,43 @@ var_dump($to);
 $sujet = 'Suggestion de modification de '.$nom_produit;
 var_dump($sujet);
 
-$headers = '';
-
-$headers.='From:"Victor KL"<victor.kodais_loquet@utt.fr>'."\n";
-$headers.='Content-Type:text/html; charset="uft-8"'."\n";
-$headers.='Content-Transfer-Encoding: 8bit';
-var_dump($headers);
-
 $message=$r_bug;
 var_dump($message);
 
-if (mail($to, $sujet, $message, $headers)){
-  require 'mysql_connect.php';
+$mail = new PHPMailer(true);
 
 
-  $requete_insert_mail = "INSERT INTO `mail`(
-    `mail_to`
-    , `message`)
-    VALUES (
-      $to
-      ,'".mysqli_real_escape_string($connection,$message)."'
-    )";
-      echo $requete_insert_mail;
-      $res_insert_mail = mysqli_query($connection,$requete_insert_mail) or exit(mysqli_error($connection));
+    $mail->IsSMTP(); // telling the class to use SMTP
+    $mail->SMTPAuth = true; // enable SMTP authentication
+    $mail->SMTPSecure = "tls"; // sets the prefix to the servier
+    $mail->Host = "smtp.gmail.com"; // sets GMAIL as the SMTP server
+    $mail->Port = 587; // set the SMTP port for the GMAIL server
+    $mail->Username = "victor.kodaisloquet@gmail.com"; // GMAIL username
+    $mail->Password = "vkl08041996"; // GMAIL password
 
-      //header('Location: index.php');
+
+
+$email = "victor.kodais_loquet@utt.fr";
+$name = "Victor KODAIS-LOQUET";
+$email_from = "victor.kodaisloquet@gmail.com";
+$name_from = "Victor KODAIS-LOQUET";
+
+//Typical mail data
+$mail->AddAddress($email, $name);
+$mail->SetFrom($email_from, $name_from);
+$mail->Subject = $sujet;
+$mail->Body = $message;
+
+var_dump($mail);
+
+try{
+    $mail->Send();
+    header('Location: index.php');
+} catch(Exception $e){
+    //Something went bad
+    echo "Fail - " . $mail->ErrorInfo;
 }
+
 
 
 ?>

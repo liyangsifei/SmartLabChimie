@@ -22,7 +22,7 @@ if(!$connection)
 
 if (!mysqli_select_db ($connection,'chimie'))
 {
-	echo 'Base de données non selectionnée';
+	echo 'Base de connées non selectionnée';
 }
 
 ?>
