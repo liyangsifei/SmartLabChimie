@@ -66,6 +66,9 @@
             <div class="melange">
                 <form methode="GET" action="melange.php" class="melange">
                     <input type="submit" value="Créer un nouveau mélange">
+                </form><br/>
+                <form methode="GET" action="capteur_poubelle.php" class="melange">
+                    <input type="submit" value="Capteurs">
                 </form>
             </div>
         </main>
