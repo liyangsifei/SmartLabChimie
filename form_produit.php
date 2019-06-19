@@ -85,7 +85,7 @@ if (isset($_COOKIE["erreur_ajout_produit"])){
                     <select name="mention_danger[]" multiple>
                       <?php
                       require __DIR__.'/tools/cURL.php';
-                      $data = curlGet(mentionDangersURL);
+                      $data = curlGet(mentionDangersURL."list/");
                       $data = json_decode($data,true);
                       for($ind=0;$ind<count($data);$ind++) {
                         echo '<option value="'.$data[$ind]["code"].' - '.$data[$ind]["phrase"].'">'.$data[$ind]["code"].' - '.$data[$ind]["phrase"].'</option>';
@@ -103,7 +103,7 @@ if (isset($_COOKIE["erreur_ajout_produit"])){
                     Conseils de prudence :<br/>
                     <select name="conseil_prudence[]" multiple>
                       <?php
-                      $data = curlGet(conseilPrudencesURL);
+                      $data = curlGet(conseilPrudencesURL."list/");
                       $data = json_decode($data,true);
                       for($ind=0;$ind<count($data);$ind++) {
                         echo '<option value="'.$data[$ind]["code"].' - '.$data[$ind]["phrase"].'">'.$data[$ind]["code"].' - '.$data[$ind]["phrase"].'</option>';
@@ -120,7 +120,7 @@ if (isset($_COOKIE["erreur_ajout_produit"])){
                     <br />
                     Pictogramme de sécurité :<br/>
                     <?php
-                    $data = curlGet(pictogrammeSecuritesURL);
+                    $data = curlGet(pictogrammeSecuritesURL."list/");
                     $data = json_decode($data,true);
                     for($ind=0;$ind<count($data);$ind++) {
                       echo '<input type="checkbox" id="picto_secu" name="picto_secu[]" value="'.$data[$ind]["nom"].'" /> <label for="picto_secu">'.$data[$ind]["nom"].'</label>';
@@ -141,7 +141,7 @@ if (isset($_COOKIE["erreur_ajout_produit"])){
 
                     Pictogramme de précaution :<br/>
                     <?php
-                    $data = curlGet(pictogrammePrecautionsURL);
+                    $data = curlGet(pictogrammePrecautionsURL."list/");
                     $data = json_decode($data,true);
                     for($ind=0;$ind<count($data);$ind++) {
                       echo '<input type="checkbox" id="picto_precau" name="picto_precau[]" value="'.$data[$ind]["nom"].'" /> <label for="picto_precau">'.$data[$ind]["nom"].'</label>';
@@ -159,7 +159,7 @@ if (isset($_COOKIE["erreur_ajout_produit"])){
 
                     Stockage :
                     <?php
-                    $data = curlGet(stockagesURL);
+                    $data = curlGet(stockagesURL."list/");
                     $data = json_decode($data,true);
                     echo '<select name="stockage">';
                     for($ind=0;$ind<count($data);$ind++) {
@@ -181,7 +181,7 @@ if (isset($_COOKIE["erreur_ajout_produit"])){
 
                     Poubelle :
                     <?php
-                    $data = curlGet(stockagesURL);
+                    $data = curlGet(poubellesURL."list/");
                     $data = json_decode($data,true);
                     echo '<select name="poubelle">';
                     for($ind=0;$ind<count($data);$ind++) {

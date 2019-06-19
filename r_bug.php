@@ -30,7 +30,6 @@
             <div class="envoi_mail_bug">
                 <h3>Suggestion de modification du produit
                 <?php
-
 					         echo $nom_produit;
 				        ?> :
                 </h3>

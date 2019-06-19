@@ -72,18 +72,17 @@ class ServiceController {
       $path = $_SERVER['PATH_INFO'];
       $params = explode('/', $path);
 
-      $reqType1 = explode('.', $params[1]);
-      $this->_resourceName = $reqType1[0];
-      if(!empty($reqType1[1])) {
-        $this->_requestType = $reqType1[1];
-        if(!in_array($this->_requestType, $this->_allowedRequestMediaType)){
-          throw new Exception('requested type not allowed', 400);
+      if(empty($params[2])) {
+        $reqType1 = explode('.', $params[1]);
+        $this->_resourceName = $reqType1[0];
+        if(!empty($reqType1[1])) {
+          $this->_requestType = $reqType1[1];
+          if(!in_array($this->_requestType, $this->_allowedRequestMediaType)){
+            throw new Exception('requested type not allowed', 400);
+          }
         }
-      }
-      if(!in_array($this->_resourceName, $this->_allowedResources)) {
-        throw new Exception('resource not allowed', 400);
-      }
-      if(!empty($params[2])) {
+      } else {
+        $this->_resourceName = $params[1];
         if(strstr($params[2],'list')) {
           $reqType2 = explode('.',$params[2]);
           $this->_resourceId = $reqType2[0];
@@ -103,6 +102,9 @@ class ServiceController {
             }
           }
         }
+      }
+      if(!in_array($this->_resourceName, $this->_allowedResources)) {
+        throw new Exception('resource not allowed', 400);
       }
     }
   }
@@ -722,7 +724,8 @@ class ServiceController {
     exit();
   }
   private function _xml($array, $root, $list) {
-    $xml = '<?xml version="1.0" encoding="utf-8"?>';
+    header("Content-type: text/xml");
+    $xml = '<?xml version = "1.0" encoding="utf-18" standalone="yes" ?>';
     $xml .= (strstr($list, 'list') ? '<'.$root.'>' : '<'.rtrim($root, "s").'>');
     $xml .= $this-> data_to_xml($array, rtrim($root, "s"));
     $xml .= (strstr($list, 'list') ? '</'.$root.'>' : '</'.rtrim($root, "s").'>');
@@ -732,6 +735,7 @@ class ServiceController {
     print_r($array);
   }
   private function _tab($array) {
+    header("Content-Type: text/html; charset=utf-8");
     echo "<table>";
     if(empty($array[0])) {
       echo "<tr>";

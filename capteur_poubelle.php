@@ -34,7 +34,7 @@
 
             require __DIR__.'/tools/cURL.php';
             echo '<table>';
-            $data = curlGet(poubellesURL);
+            $data = curlGet(poubellesURL."list/");
             $data = json_decode($data,true);
             if(empty($data)) {
               echo '<a href="./form_poubelle.php">Pas de poubelle dans la base de données, cliquez ici pour en ajouter.</a>';

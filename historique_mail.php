@@ -33,7 +33,7 @@
             <?php
             require __DIR__.'/tools/cURL.php';
             echo '<table>';
-            $data = curlGet(mailsURL);
+            $data = curlGet(mailsURL."list/");
             $data = json_decode($data,true);
             if(empty($data)) {
               echo 'Pas de Mail dans la base de données';

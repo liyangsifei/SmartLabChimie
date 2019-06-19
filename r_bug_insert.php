@@ -4,6 +4,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/autoload.php';
+require __DIR__.'/tools/cURL.php';
 
 $nom_produit = isset($_POST['nom_produit']) ? $_POST['nom_produit'] : '';
 $r_bug = isset($_POST['r_bug']) ? $_POST['r_bug'] : '';
@@ -43,11 +44,17 @@ $mail->SetFrom($email_from, $name_from);
 $mail->Subject = $sujet;
 $mail->Body = $message;
 
-var_dump($mail);
+//var_dump($mail);
 
 try{
     $mail->Send();
-    header('Location: index.php');
+    $d = date('Y-m-d H:i:s');
+    $arr = array('mail_to' => $email_from, 'date' => $d, 'message' => $message);
+    $data = json_encode($arr);
+    curlPost(mailsURL, $data);
+    if(!empty($arr)) {
+      header('Location: index.php');
+    }
 } catch(Exception $e){
     //Something went bad
     echo "Fail - " . $mail->ErrorInfo;
